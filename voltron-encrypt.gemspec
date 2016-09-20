@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["eric@commercekitchen.com"]
 
   spec.summary       = %q{Enables base 64 encoded ids on rails models}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.homepage      = "https://github.com/ehainer/voltron-encrypt"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
