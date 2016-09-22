@@ -49,11 +49,13 @@ CONTENT
 				end
 
 				def copy_blacklist
-					copy_file "config/locales/blacklist.txt", Rails.root.join("config", "locales", "blacklist.txt")
+					unless File.exist? Rails.root.join("config", "locales", "blacklist.txt")
+						copy_file "config/locales/blacklist.txt", Rails.root.join("config", "locales", "blacklist.txt")
+					end
 				end
 
 				def copy_migrations
-					copy_file "db/migrate/create_voltron_ids.rb", Rails.root.join("db", "migrate", "#{Time.now.strftime("%Y%m%dT%H%M%S")}_create_voltron_ids.rb")
+					copy_file "db/migrate/create_voltron_ids.rb", Rails.root.join("db", "migrate", "#{Time.now.strftime("%Y%m%d%H%M%S")}_create_voltron_ids.rb")
 				end
 			end
 		end
