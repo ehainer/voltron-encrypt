@@ -1,6 +1,7 @@
 require "voltron"
 require "voltron/encrypt/version"
 require "voltron/config/encrypt"
+require "voltron/encryptable"
 
 module Voltron
 	class Encrypt

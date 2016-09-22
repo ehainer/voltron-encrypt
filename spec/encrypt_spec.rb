@@ -13,16 +13,16 @@ describe Voltron::Encrypt do
 	end
 
 	it "can base64 encode an integer" do
-		expect(encrypt.encode(1234567890)).to eq("d-IPL0")
+		expect(encrypt.encode(1234567890)).to eq("lHaoh3")
 	end
 
 	it "can decode a base64 encoded value" do
-		expect(encrypt.decode("d-IPL0")).to eq(1234567890)
+		expect(encrypt.decode("lHaoh3")).to eq(1234567890)
 	end
 
 	it "should be able to identify values that match blacklisted words" do
-		# 6107072 == encoded "butt"
-		expect(encrypt.blacklisted?(6107072)).to eq(true)
+		# 16397913 == encoded "butt"
+		expect(encrypt.blacklisted?(16397913)).to eq(true)
 	end
 
 end

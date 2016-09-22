@@ -96,4 +96,8 @@ RSpec.configure do |config|
   # test failures related to randomization by passing the same `--seed` value
   # as the one that triggered the failure.
   Kernel.srand config.seed
+
+  config.before(:all) do
+    Voltron.config.encrypt.seed = "6176f1041ca87bac61bb48215eccaeeb95248c2102c899981e2abd5aaefbad81e22d4b4aa4ccca1826bb3245b7c371e7105bbafedcaf6ce5c774f8da03726a4a"
+  end
 end
