@@ -65,22 +65,37 @@ module Voltron
 			end
 
 			def find_id
+				# Helps determine the min/max value. For example if amount is 1100, min will be 1024, if amount is 947, min will be 1
 				amount = Voltron::Id.count.to_f
-				factor = 256.to_f
+
+				# The range of ids from which we try to find an unused id, i.e. - (1..1024), (1025..2048), (2049..3073)
+				factor = 1024.to_f
+
+				# Get the min and max value of the range segment
 				min = (((amount/factor).floor*factor) + 1).to_i
 				max = (((amount+1)/factor).ceil*factor).to_i
-				used = Voltron::Id.where(id: min..max).pluck(:id)
-				ids = ((min..max).to_a - used).shuffle
-				candidate = ids.first
 
-				if crypt.blacklisted?(candidate)
+				# Get all ids in the determined range segment, these are the ids we cannot choose from
+				used = Voltron::Id.where(id: min..max).pluck(:id)
+				# Get the candidates, an array of values from min to max, subtracting the used values from above
+				candidates = ((min..max).to_a - used).shuffle
+				# Get the first candidate, the first value off the shuffled array
+				candidate = candidates.shift
+
+				# Check for blacklisted words given the candidate id
+				while crypt.blacklisted?(candidate) do
 					# If id chosen is a blacklisted word, insert it as a placeholder record and try again
 					Voltron::Id.create(id: candidate, resource_id: 0, resource_type: :blacklist)
-					find_id
-				else
-					# The id chosen is good, not a blacklisted word. Use it
-					candidate
+
+					# If no more candidates to choose from, re-run find_id, it will get a new set of candidates from the next segment
+					return find_id if candidates.empty?
+
+					# Pick the next candidate
+					candidate = candidates.shift
 				end
+
+				# The id chosen is good, not a blacklisted word. Use it
+				candidate
 			end
 
 			def reload(options = nil)

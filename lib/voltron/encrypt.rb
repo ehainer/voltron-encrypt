@@ -77,4 +77,3 @@ module Voltron
 end
 
 require "voltron/encrypt/engine" if defined?(Rails)
-require "voltron/encrypt/railtie" if defined?(Rails)

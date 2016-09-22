@@ -3,7 +3,7 @@ module Voltron
 		module Generators
 			class InstallGenerator < Rails::Generators::Base
 
-				source_root File.expand_path("../../../../../spec/railsapp/config/locales", __FILE__)
+				source_root File.expand_path("../../../../../spec/railsapp", __FILE__)
 
 				desc "Add Voltron Encrypt initializer"
 
@@ -49,7 +49,11 @@ CONTENT
 				end
 
 				def copy_blacklist
-					copy_file "blacklist.txt", Rails.root.join("config", "locales", "blacklist.txt")
+					copy_file "config/locales/blacklist.txt", Rails.root.join("config", "locales", "blacklist.txt")
+				end
+
+				def copy_migrations
+					copy_file "db/migrate/create_voltron_ids.rb", Rails.root.join("db", "migrate", "#{Time.now.strftime("%Y%m%dT%H%M%S")}_create_voltron_ids.rb")
 				end
 			end
 		end
