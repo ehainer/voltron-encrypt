@@ -3,7 +3,7 @@ module Voltron
 		module Generators
 			class InstallGenerator < Rails::Generators::Base
 
-				source_root File.expand_path("../../../../spec/railsapp/config/locales", __FILE__)
+				source_root File.expand_path("../../../../../spec/railsapp/config/locales", __FILE__)
 
 				desc "Add Voltron Encrypt initializer"
 
@@ -20,7 +20,7 @@ module Voltron
 
 					current_initiailzer = File.read voltron_initialzer_path
 
-					unless current_initiailzer.match(Regexp.new(/^\s# === Voltron Translate Configuration ===\n/))
+					unless current_initiailzer.match(Regexp.new(/^\s# === Voltron Encrypt Configuration ===\n/))
 						inject_into_file(voltron_initialzer_path, after: "Voltron.setup do |config|\n") do
 <<-CONTENT
 
