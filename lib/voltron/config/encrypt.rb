@@ -10,8 +10,8 @@ module Voltron
 			attr_accessor :offset, :seed, :blacklist
 
 			def initialize
-				@offset ||= 64
-				@seed ||= nil
+				@offset ||= 262144
+				@seed ||= ""
 				@blacklist ||= Rails.root.join("config", "locales", "blacklist.txt")
 			end
 		end

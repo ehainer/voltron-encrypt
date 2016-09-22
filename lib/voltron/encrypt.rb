@@ -1,3 +1,4 @@
+require "voltron"
 require "voltron/encrypt/version"
 require "voltron/config/encrypt"
 
