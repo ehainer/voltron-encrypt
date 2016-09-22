@@ -8,5 +8,5 @@
 /spec/reports/
 tmp/
 log/
-*.bak
 voltron-*.gem
+*.bak
