@@ -52,7 +52,11 @@ module Voltron
     private
 
       def blacklist(len = 6)
-        File.readlines(Voltron.config.encrypt.blacklist).map(&:strip).reject { |line| line.length > len }.join(" ")
+        if File.exist?(Voltron.config.encrypt.blacklist.to_s)
+          File.readlines(Voltron.config.encrypt.blacklist).map(&:strip).reject { |line| line.length > len }.join(" ")
+        else
+          ""
+        end
       end
 
       def translations
