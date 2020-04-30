@@ -11,17 +11,7 @@ module Voltron
 
       has_one :encryptable, as: :resource, class_name: "Voltron::Id"
 
-      before_create do
-        self.build_encryptable id: find_id
-      end
-
-      # Add encryptable relation for records that existed prior
-      # to the gem being installed (retroactively add encrypted id)
-      after_initialize do
-        unless new_record? || encryptable.present?
-          self.create_encryptable id: find_id
-        end
-      end
+      before_save { self.build_encryptable id: find_id }, if: proc { |i| i.encryptable.blank? }
 
       default_scope { left_outer_joins(:encryptable).includes(:encryptable) }
 
