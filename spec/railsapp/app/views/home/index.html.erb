@@ -1,0 +1,7 @@
+<%= form_for @user do |f| %>
+  <%= f.collection_check_boxes :car_ids, Car.all, :to_param, :name %>
+  <div>
+    <%= f.collection_radio_buttons :car_id, Car.all, :to_param, :name %>
+  </div>
+  <%= f.submit %>
+<% end %>
