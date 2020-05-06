@@ -64,8 +64,7 @@ module Voltron
 
     module InstanceMethods
       def assign_attributes(new_attributes)
-        new_attributes.stringify_keys!
-        belongs = self.class.reflect_on_all_associations(:belongs_to).map { |b| { column: "#{b.name}_id", class_name: (b.options[:class_name] || b.name).to_s.classify } }
+        belongs = self.class.reflect_on_all_associations(:belongs_to).map { |b| { column: "#{b.name}_id".to_sym, class_name: (b.options[:class_name] || b.name).to_s.classify } }
 
         belongs.each do |belong|
           begin
@@ -82,8 +81,7 @@ module Voltron
       end
 
       def update_attributes(attributes)
-        attributes.stringify_keys!
-        belongs = self.class.reflect_on_all_associations(:belongs_to).map { |b| { column: "#{b.name}_id", class_name: (b.options[:class_name] || b.name).to_s.classify } }
+        belongs = self.class.reflect_on_all_associations(:belongs_to).map { |b| { column: "#{b.name}_id".to_sym, class_name: (b.options[:class_name] || b.name).to_s.classify } }
 
         belongs.each do |belong|
           begin

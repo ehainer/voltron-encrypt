@@ -40,7 +40,7 @@ describe Voltron::Encryptable do
 
   it "should be able to destroy a resource by it's base64 encoded id" do
     user.save
-    expect(User.destroy(user.to_param)).to eq(user)
+    expect(User.find(user.to_param).destroy).to eq(user)
   end
 
   it "should be able to delete a resource by it's base64 encoded id" do

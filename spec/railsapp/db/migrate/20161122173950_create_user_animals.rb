@@ -1,4 +1,4 @@
-class CreateUserAnimals < ActiveRecord::Migration
+class CreateUserAnimals < ActiveRecord::Migration[4.2]
   def change
     create_table :user_animals do |t|
       t.integer :user_id
